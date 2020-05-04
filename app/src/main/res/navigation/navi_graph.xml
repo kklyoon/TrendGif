@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navi_graph"
+    app:startDestination="@id/nav_trend">
+
+    <fragment
+        android:id="@+id/nav_trend"
+        android:name="com.example.trendgif.TrendFragment"
+        tools:layout="@layout/fragment_trend">
+        <action
+            android:id="@+id/action_trend_toGif"
+            app:destination="@+id/nav_gif"/>
+        <argument
+            android:name="woeid"
+            app:argType="integer"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gif"
+        android:name="com.example.trendgif.GifFragment"
+        tools:layout="@layout/fragment_gif">
+        <action
+            android:id="@+id/action_gif_toTrend"
+            app:destination="@+id/nav_trend"/>
+        <argument
+            android:name="hashtag"
+            app:argType="string"/>
+
+    </fragment>
+
+</navigation>

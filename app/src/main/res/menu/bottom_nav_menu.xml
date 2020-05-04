@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_world"
+        android:title="@string/world" />
+    <item
+        android:id="@+id/navigation_kr"
+        android:title="@string/kr" />
+    <item
+        android:id="@+id/navigation_us"
+        android:title="@string/us"/>
+
+</menu>

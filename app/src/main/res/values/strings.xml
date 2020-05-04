@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">TrendGif</string>
+    <string name="world">World Wide</string>
+    <string name="kr">Korea</string>
+    <string name="us">USA</string>
+</resources>

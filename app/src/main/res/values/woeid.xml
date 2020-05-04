@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="US">2352824</integer>
+    <integer name="KR">1130853</integer>
+    <integer name="WORLD">1</integer>
+</resources>
