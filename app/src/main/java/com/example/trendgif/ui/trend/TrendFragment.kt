@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.trendgif.R
 import com.example.trendgif.databinding.FragmentTrendBinding
 import com.example.trendgif.ui.gif.GifFragmentDirections
+import com.example.trendgif.util.EventObserver
 import com.example.trendgif.util.Logger
 
 
@@ -42,7 +43,7 @@ class TrendFragment : Fragment() {
             progressCircular.show()
         }
         setListAdapter()
-        trendViewModel.searchGifEvent.observe(viewLifecycleOwner, Observer {
+        trendViewModel.searchGifEvent.observe(viewLifecycleOwner, EventObserver {
             openGifFragment(it)
         })
         return viewDataBinding.root

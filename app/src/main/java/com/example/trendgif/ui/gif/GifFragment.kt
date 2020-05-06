@@ -9,10 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.trendgif.R
 import com.example.trendgif.databinding.FragmentGifBinding
+import com.example.trendgif.entity.GifObject
+import com.example.trendgif.util.EventObserver
 import com.example.trendgif.util.Logger
 
 
@@ -24,10 +28,14 @@ class GifFragment : Fragment() {
     private lateinit var gifItemAdapter: GifItemAdapter
     private val args: GifFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gifViewModel = ViewModelProvider(activity as ViewModelStoreOwner, GifViewModelFactory<GifViewModel>(args.hashtag)).get(GifViewModel::class.java)
+        gifViewModel = ViewModelProvider(
+            activity as ViewModelStoreOwner,
+            GifViewModelFactory<GifViewModel>(args.hashtag)
+        ).get(GifViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +43,7 @@ class GifFragment : Fragment() {
         viewDataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_gif, container, false)
         viewDataBinding.apply {
             vm = gifViewModel
+            gifViewModel.setHashTag(args.hashtag)
             progressCircular.show()
         }
         setUpAdapter()
@@ -42,20 +51,35 @@ class GifFragment : Fragment() {
     }
 
 
-    fun setUpAdapter(){
+    private fun setUpAdapter() {
         val viewModel = viewDataBinding.vm
-        //        val lm =
+//        val lm =
 //            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         val lm = GridLayoutManager(activity, 2)
-        viewModel?.let{
+        viewModel?.let {
             gifItemAdapter = GifItemAdapter(it)
             viewDataBinding.rvSearch.layoutManager = lm
             viewDataBinding.rvSearch.adapter = gifItemAdapter
             it.itemList.observe(viewLifecycleOwner, Observer { pagedList ->
                 viewDataBinding.progressCircular.hide()
-                gifItemAdapter.submitList(pagedList)
+                if (pagedList.size == 0) {
+                    viewDataBinding.tvNoResult.visibility = View.VISIBLE
+                    viewDataBinding.tvNoResult.text = String.format(
+                        resources.getString(R.string.search_no_result),
+                        args.hashtag
+                    )
+                } else gifItemAdapter.submitList(pagedList)
+            })
+            it.openDetailEvent.observe(viewLifecycleOwner, EventObserver{
+                openGifDetails(it)
             })
         }
+    }
+
+    private fun openGifDetails(gifObject: GifObject){
+//        logger.d("openGifDetails ${gifObject}")
+        val action = GifFragmentDirections.actionGifToDetail(gifObject)
+        findNavController().navigate(action)
     }
 
 }

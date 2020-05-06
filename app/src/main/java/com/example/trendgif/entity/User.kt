@@ -1,7 +1,10 @@
 package com.example.trendgif.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
     @SerializedName("avator_url")
     val avator_url: String,
@@ -13,4 +16,4 @@ data class User(
     val username: String,
     @SerializedName("display_name")
     val display_name: String
-)
+): Parcelable

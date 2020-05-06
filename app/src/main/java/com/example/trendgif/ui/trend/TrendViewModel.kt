@@ -9,6 +9,7 @@ import com.example.trendgif.api.TwtDataSource
 import com.example.trendgif.api.TwtDataSourceFactory
 import com.example.trendgif.entity.Trend
 import com.example.trendgif.entity.TweetTrends
+import com.example.trendgif.util.Event
 import com.example.trendgif.util.Logger
 import io.reactivex.disposables.CompositeDisposable
 
@@ -18,9 +19,9 @@ class TrendViewModel(val woeid:Int = 1) : ViewModel() {
     private var twtDataSourceFactory: TwtDataSourceFactory
     private val _itemList = MutableLiveData<PagedList<Trend>>()
     var itemList: LiveData<PagedList<Trend>> = _itemList
-    private val _searchGifEvent = MutableLiveData<String>()
-    var searchGifEvent: LiveData<String> = _searchGifEvent
-    val config = PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(50).build()
+    private val _searchGifEvent = MutableLiveData<Event<String>>()
+    var searchGifEvent: LiveData<Event<String>> = _searchGifEvent
+    private val config = PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(50).build()
 
     private val compositeDisposable = CompositeDisposable()
     init{
@@ -35,7 +36,7 @@ class TrendViewModel(val woeid:Int = 1) : ViewModel() {
     }
 
     fun openSearch(name: String){
-        _searchGifEvent.postValue(name)
+        _searchGifEvent.postValue(Event(name))
     }
 
     override fun onCleared() {

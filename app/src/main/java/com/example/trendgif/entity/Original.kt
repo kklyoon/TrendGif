@@ -1,6 +1,8 @@
 package com.example.trendgif.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /*
                 "original": {
@@ -16,6 +18,7 @@ import com.google.gson.annotations.SerializedName
                     "width": "480"
                 }
  */
+@Parcelize
 data class Original(
     @SerializedName("frames")
     val frames: String,
@@ -32,9 +35,9 @@ data class Original(
     @SerializedName("url")
     val url: String,
     @SerializedName("webp")
-    val webp: String,
+    val webp: String?,
     @SerializedName("webp_size")
     val webp_size: String,
     @SerializedName("width")
     val width: String
-)
+): Parcelable

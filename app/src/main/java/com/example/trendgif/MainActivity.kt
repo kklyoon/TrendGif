@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_us -> woeid = resources.getInteger(R.integer.US)
                 else -> {}
             }
-            val action = TrendFragmentDirections.actionTrendSelf(woeid)
+            val action = NaviGraphDirections.actionTrend(woeid)
             findNavController(R.id.nav_host_fragment).navigate(action)
             true
         }

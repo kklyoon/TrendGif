@@ -5,6 +5,10 @@
     android:id="@+id/navi_graph"
     app:startDestination="@id/nav_trend">
 
+    <action
+        android:id="@+id/action_trend"
+        app:destination="@id/nav_trend"
+        app:launchSingleTop="true" />
     <fragment
         android:id="@+id/nav_trend"
         android:name="com.example.trendgif.ui.trend.TrendFragment"
@@ -12,9 +16,6 @@
         <action
             android:id="@+id/action_trend_toGif"
             app:destination="@+id/nav_gif"/>
-        <action
-            android:id="@+id/action_trend_self"
-            app:destination="@id/nav_trend" />
         <argument
             android:name="woeid"
             app:argType="integer"
@@ -29,9 +30,21 @@
         <action
             android:id="@+id/action_gif_toTrend"
             app:destination="@+id/nav_trend"/>
+        <action
+            android:id="@+id/action_gif_toDetail"
+            app:destination="@+id/nav_detail"/>
         <argument
             android:name="hashtag"
             app:argType="string"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_detail"
+        android:name="com.example.trendgif.ui.detail.DetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="gifObject"
+            app:argType="com.example.trendgif.entity.GifObject"/>
 
     </fragment>
 
