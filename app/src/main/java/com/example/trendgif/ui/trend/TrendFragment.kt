@@ -9,9 +9,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.trendgif.R
 import com.example.trendgif.databinding.FragmentTrendBinding
+import com.example.trendgif.ui.gif.GifFragmentDirections
 import com.example.trendgif.util.Logger
 
 
@@ -40,6 +42,9 @@ class TrendFragment : Fragment() {
             progressCircular.show()
         }
         setListAdapter()
+        trendViewModel.searchGifEvent.observe(viewLifecycleOwner, Observer {
+            openGifFragment(it)
+        })
         return viewDataBinding.root
     }
 
@@ -47,12 +52,18 @@ class TrendFragment : Fragment() {
         val viewModel = viewDataBinding.viewModel
 
         viewModel?.let{
-            trendAdapter = TrendAdapter()
+            trendAdapter = TrendAdapter(it)
             viewDataBinding.rvTrend.adapter = trendAdapter
             it.itemList.observe(viewLifecycleOwner, Observer { pagedList ->
                 viewDataBinding.progressCircular.hide()
                 trendAdapter.submitList(pagedList)
             })
         }
+    }
+
+    private fun openGifFragment(hashtag: String){
+        logger.d("openGifFragment : ${hashtag}")
+        val action = TrendFragmentDirections.actionTrendToGif(hashtag)
+        findNavController().navigate(action)
     }
 }

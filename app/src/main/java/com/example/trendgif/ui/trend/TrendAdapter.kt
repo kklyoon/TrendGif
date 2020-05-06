@@ -11,7 +11,7 @@ import com.example.trendgif.BR
 import com.example.trendgif.R
 import com.example.trendgif.entity.Trend
 
-class TrendAdapter: PagedListAdapter<Trend, TrendAdapter.TrendViewHolder>(diffCallback) {
+class TrendAdapter(private val viewModel: TrendViewModel): PagedListAdapter<Trend, TrendAdapter.TrendViewHolder>(diffCallback) {
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_trend
@@ -25,7 +25,8 @@ class TrendAdapter: PagedListAdapter<Trend, TrendAdapter.TrendViewHolder>(diffCa
         val item = getItem(position)
         item?.let{
             item.name = item.name.replace("#", "")
-            holder.binding.setVariable(BR.trenditem, it)
+            holder.binding.setVariable(BR.item, it)
+            holder.binding.setVariable(BR.vm, viewModel)
             holder.binding.executePendingBindings()
         }
     }

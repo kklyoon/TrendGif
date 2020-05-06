@@ -18,6 +18,8 @@ class TrendViewModel(val woeid:Int = 1) : ViewModel() {
     private var twtDataSourceFactory: TwtDataSourceFactory
     private val _itemList = MutableLiveData<PagedList<Trend>>()
     var itemList: LiveData<PagedList<Trend>> = _itemList
+    private val _searchGifEvent = MutableLiveData<String>()
+    var searchGifEvent: LiveData<String> = _searchGifEvent
     val config = PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(50).build()
 
     private val compositeDisposable = CompositeDisposable()
@@ -30,6 +32,10 @@ class TrendViewModel(val woeid:Int = 1) : ViewModel() {
     fun setWoeid(newWoeid: String){
         twtDataSourceFactory = TwtDataSourceFactory(compositeDisposable, TwtAPI.getApi(), newWoeid)
         itemList = LivePagedListBuilder(twtDataSourceFactory, config).build()
+    }
+
+    fun openSearch(name: String){
+        _searchGifEvent.postValue(name)
     }
 
     override fun onCleared() {

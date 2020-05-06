@@ -2,8 +2,11 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="trenditem"
+            name="item"
             type="com.example.trendgif.entity.Trend" />
+        <variable
+            name="vm"
+            type="com.example.trendgif.ui.trend.TrendViewModel" />
     </data>
 
     <LinearLayout
@@ -12,12 +15,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/cardview_dark_background"
-        android:layout_marginBottom="3dp">
+        android:layout_marginBottom="3dp"
+        android:onClick="@{()->vm.openSearch(item.name)}">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{trenditem.name}"
+            android:text="@{item.name}"
             android:gravity="start"
             android:textSize="24sp"
             android:padding="6dp"
@@ -29,7 +33,7 @@
             android:gravity="end"
             android:layout_gravity="end"
             android:padding="6dp"
-            app:TweetVolume="@{trenditem}"
+            app:TweetVolume="@{item}"
             />
 
 
