@@ -16,10 +16,10 @@ import retrofit2.http.Query
 interface GiphyAPI {
 
     @GET("gifs/search")
-    fun searchKeyword(@Query("q") keyword: String, @Query("limit") limit: Int = Global.PAGE_SIZE, @Header("api_key") key: String = Global.GIPHY_API_KEY): Single<GifsResponseData>
+    fun searchKeyword(@Query("q") keyword: String, @Query("limit") limit: Int = Global.GIPHY_PAGE_SIZE, @Header("api_key") key: String = Global.GIPHY_API_KEY): Single<GifsResponseData>
 
     @GET("gifs/search")
-    fun searchKeywordNext(@Query("q") keyword: String, @Query("offset") page: Int, @Query("limit") limit: Int = Global.PAGE_SIZE, @Header("api_key") key: String = Global.GIPHY_API_KEY): Single<GifsResponseData>
+    fun searchKeywordNext(@Query("q") keyword: String, @Query("offset") page: Int, @Query("limit") limit: Int = Global.GIPHY_PAGE_SIZE, @Header("api_key") key: String = Global.GIPHY_API_KEY): Single<GifsResponseData>
 
     @GET("gifs/{gif_id}")
     fun getGif(@Path("gif_id") gif_id: String, @Header("api_key") key: String = Global.GIPHY_API_KEY): Call<GifResponseData>

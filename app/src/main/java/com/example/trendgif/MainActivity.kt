@@ -1,37 +1,33 @@
 package com.example.trendgif
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.example.trendgif.databinding.ActivityMainBinding
+import androidx.navigation.ui.NavigationUI
+import com.example.trendgif.ui.trend.TrendFragmentDirections
 import com.example.trendgif.util.Logger
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val logger = Logger.getLogger(this.javaClass.simpleName)
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.activity = this@MainActivity
-    }
-
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return super.onCreateView(name, context, attrs)
-    }
-
-    fun bottomClick(view: View){
-        when(view.id){
-            R.id.btn_world -> logger.d("world")
-            R.id.btn_kr -> logger.d("kr")
-            R.id.btn_us -> logger.d("us")
+        setContentView(R.layout.activity_main)
+        NavigationUI.setupWithNavController(main_bottom_navigation, findNavController(R.id.nav_host_fragment))
+        var woeid = resources.getInteger(R.integer.WORLD)
+        main_bottom_navigation.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.navigation_world -> woeid = resources.getInteger(R.integer.WORLD)
+                R.id.navigation_kr -> woeid = resources.getInteger(R.integer.KR)
+                R.id.navigation_us -> woeid = resources.getInteger(R.integer.US)
+                else -> {}
+            }
+            val action = TrendFragmentDirections.actionTrendSelf(woeid)
+            findNavController(R.id.nav_host_fragment).navigate(action)
+            true
         }
     }
 }

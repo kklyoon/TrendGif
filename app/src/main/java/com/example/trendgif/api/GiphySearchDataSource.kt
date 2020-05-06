@@ -29,8 +29,8 @@ class GiphySearchDataSource(private val giphyAPI: GiphyAPI,
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, GifObject>) {
         val nextKey = params.key + 1
-        logger.d("loadAfter, Offset : ${nextKey * Global.PAGE_SIZE}  , count: ${params.requestedLoadSize}")
-        compositeDisposable.add(giphyAPI.searchKeywordNext(searchKey, nextKey * Global.PAGE_SIZE).subscribe({ res ->
+        logger.d("loadAfter, Offset : ${nextKey * Global.GIPHY_PAGE_SIZE}  , count: ${params.requestedLoadSize}")
+        compositeDisposable.add(giphyAPI.searchKeywordNext(searchKey, nextKey * Global.GIPHY_PAGE_SIZE).subscribe({ res ->
             logger.d("loadAfter size : ${res.dataList.size}, pagination: ${res.pagination}, meta : ${res.meta}")
             callback.onResult(res.dataList, nextKey)
         }, { throwable -> logger.d("${throwable.message}") }))

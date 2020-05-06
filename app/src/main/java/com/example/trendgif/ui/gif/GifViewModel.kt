@@ -1,7 +1,7 @@
-package com.example.trendgif
+package com.example.trendgif.ui.gif
 
 import androidx.lifecycle.ViewModel
 
-class TrendViewModel : ViewModel() {
+class GifViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

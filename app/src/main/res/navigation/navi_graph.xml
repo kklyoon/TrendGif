@@ -7,20 +7,24 @@
 
     <fragment
         android:id="@+id/nav_trend"
-        android:name="com.example.trendgif.TrendFragment"
+        android:name="com.example.trendgif.ui.trend.TrendFragment"
         tools:layout="@layout/fragment_trend">
         <action
             android:id="@+id/action_trend_toGif"
             app:destination="@+id/nav_gif"/>
+        <action
+            android:id="@+id/action_trend_self"
+            app:destination="@id/nav_trend" />
         <argument
             android:name="woeid"
-            app:argType="integer"/>
+            app:argType="integer"
+            android:defaultValue="1"/>
 
     </fragment>
 
     <fragment
         android:id="@+id/nav_gif"
-        android:name="com.example.trendgif.GifFragment"
+        android:name="com.example.trendgif.ui.gif.GifFragment"
         tools:layout="@layout/fragment_gif">
         <action
             android:id="@+id/action_gif_toTrend"

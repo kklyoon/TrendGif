@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
  */
 data class Trend(
     @SerializedName("name")
-    val name:String,
+    var name:String,
     @SerializedName("url")
     val url:String,
     @SerializedName("promoted_content")
@@ -18,6 +18,6 @@ data class Trend(
     @SerializedName("query")
     val query:String,
     @SerializedName("tweet_volume")
-    val tweet_volume:Long
+    val tweet_volume:Long?
 
 )

@@ -1,4 +1,4 @@
-package com.example.trendgif
+package com.example.trendgif.ui.gif
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.example.trendgif.R
 
 
 class GifFragment : Fragment() {
