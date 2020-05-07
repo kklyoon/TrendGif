@@ -1,13 +1,7 @@
 package com.example.trendgif.util
 
-import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.integration.webp.decoder.WebpDrawable
-import com.bumptech.glide.integration.webp.decoder.WebpDrawableTransformation
-import com.bumptech.glide.load.resource.bitmap.*
 import com.example.trendgif.R
 import com.example.trendgif.entity.GifObject
 import com.example.trendgif.entity.Trend
