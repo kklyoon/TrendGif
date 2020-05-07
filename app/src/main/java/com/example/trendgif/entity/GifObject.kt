@@ -17,9 +17,9 @@ data class GifObject(
     @SerializedName("images")
     val imagesData: Images,
     @SerializedName("user")
-    val user: User,
+    val user: User?,
     @SerializedName("username")
-    val username: String,
+    val username: String?,
     @SerializedName("source")
-    val source: String
+    val source: String?
 ): Parcelable

@@ -31,8 +31,6 @@ class TrendAdapter(private val viewModel: TrendViewModel): PagedListAdapter<Tren
         }
     }
 
-
-
     companion object{
         val diffCallback = object : DiffUtil.ItemCallback<Trend>() {
             override fun areItemsTheSame(oldItem: Trend, newItem: Trend): Boolean {
@@ -44,6 +42,7 @@ class TrendAdapter(private val viewModel: TrendViewModel): PagedListAdapter<Tren
             }
         }
     }
+
     inner class TrendViewHolder: RecyclerView.ViewHolder{
         val binding: ViewDataBinding
 

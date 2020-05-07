@@ -22,17 +22,20 @@ class GifViewModel(hashtag: String) : ViewModel() {
     var itemList: LiveData<PagedList<GifObject>> = _itemList
     private val _openDetailEvent = MutableLiveData<Event<GifObject>>()
     val openDetailEvent: LiveData<Event<GifObject>> = _openDetailEvent
+    var selectKeyword: String
 
     private val compositeDisposable = CompositeDisposable()
     private val config = PagedList.Config.Builder().setPageSize(Global.GIPHY_PAGE_SIZE).build()
 
     init {
+        selectKeyword = hashtag
         sourceFactory =
             GiphySearchDataSourceFactory(compositeDisposable, hashtag, GiphyAPI.getApi())
         itemList = LivePagedListBuilder(sourceFactory, config).build()
     }
 
     fun setHashTag(keyword: String){
+        selectKeyword = keyword
         sourceFactory =
             GiphySearchDataSourceFactory(compositeDisposable, keyword, GiphyAPI.getApi())
         itemList = LivePagedListBuilder(sourceFactory, config).build()
@@ -42,6 +45,10 @@ class GifViewModel(hashtag: String) : ViewModel() {
         _openDetailEvent.value = Event(gifObject)
     }
 
+    fun isTextEmpty(str:String?):Boolean{
+        if(str == "" || str == null) return true
+        return false
+    }
 
     override fun onCleared() {
         super.onCleared()

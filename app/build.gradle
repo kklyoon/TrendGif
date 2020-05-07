@@ -15,6 +15,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -65,6 +66,11 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.zlc.glide:webpdecoder:1.7.4.11.0'
+
+    //fresco
+    implementation 'com.facebook.fresco:fresco:2.2.0'
+    implementation 'com.facebook.fresco:animated-webp:2.2.0'
+    implementation 'com.facebook.fresco:webpsupport:2.2.0'
 
     //paging
     implementation 'androidx.paging:paging-runtime:2.1.2'

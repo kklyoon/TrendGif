@@ -11,47 +11,66 @@ import com.bumptech.glide.load.resource.bitmap.*
 import com.example.trendgif.R
 import com.example.trendgif.entity.GifObject
 import com.example.trendgif.entity.Trend
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.drawee.drawable.ProgressBarDrawable
+import com.facebook.drawee.view.SimpleDraweeView
+import java.text.DecimalFormat
 
 @BindingAdapter("TweetVolume")
 fun setTweetVolume(view: TextView, item: Trend){
     item.tweet_volume?.let{
-        view.text = "tweet $it times."
+        val dec = DecimalFormat("#,###").format(it)
+        val str = view.context.resources.getString(R.string.tweet_volume)
+        view.text = String.format(str, dec)
     }?: run {view.text = "N/A"}
 }
 
 @BindingAdapter("SetPreview")
-fun setPreview(view: ImageView, item: GifObject){
-    val previewWebp = item.imagesData.previewGif
-//    val previewWebp = item.imagesData.previewWebp
+fun setPreview(view: SimpleDraweeView, item: GifObject){
+    val previewWebp = item.imagesData.previewWebp
     previewWebp?.url?.let{
-        Glide.with(view).asGif().load(it).centerCrop().into(view)
-//        val crop = CenterCrop()
-//        Glide.with(view).load(it).optionalTransform(WebpDrawable::class.java, WebpDrawableTransformation(crop)).into(view)
+        view.hierarchy.setProgressBarImage(ProgressBarDrawable())
+        view.controller = Fresco.newDraweeControllerBuilder()
+            .setUri(it)
+            .setAutoPlayAnimations(true)
+            .build()
     }
 }
 
 @BindingAdapter("SetOriginal")
-fun setOriginal(view: ImageView, item: GifObject){
+fun setOriginal(view: SimpleDraweeView, item: GifObject){
     val original = item.imagesData.original
     original?.webp?.let{
-        val crop = FitCenter()
-        Glide.with(view).load(it).optionalTransform(WebpDrawable::class.java, WebpDrawableTransformation(crop)).into(view)
+        view.hierarchy.setProgressBarImage(ProgressBarDrawable())
+        view.controller = Fresco.newDraweeControllerBuilder()
+            .setUri(it)
+            .setAutoPlayAnimations(true)
+            .build()
     }
 }
 
 @BindingAdapter("LoadAvatar")
-fun setAvatar(view: ImageView, url: String?){
-    url?.let{
-        if(isGif(url))
-            Glide.with(view).asGif().load(url).centerCrop().into(view)
-        else
-            Glide.with(view).load(url).centerCrop().into(view)
-    } ?: run {
-        Glide.with(view).load(R.drawable.ic_public_white_24dp).into(view)
+fun setAvatar(view: SimpleDraweeView, item: GifObject){
+    item.user?.avator_url?.let{
+        if(isGif(it)) {
+            view.controller = Fresco.newDraweeControllerBuilder()
+                .setUri(it)
+                .setAutoPlayAnimations(true)
+                .build()
+        }
+        else {
+            view.setImageURI(it)
+        }
     }
 }
 
 fun isGif(url: String): Boolean{
     val ext = url.takeLast(3)
     return ext == "gif"
+}
+
+@BindingAdapter("SetText")
+fun setText(view:TextView, str: String?){
+    if(str == "" || str == null) view.text = "N/A"
+    else view.text = str
 }

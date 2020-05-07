@@ -4,4 +4,6 @@
     <string name="kr">Korea</string>
     <string name="us">USA</string>
     <string name="search_no_result">No Result for \'%s\'</string>
+    <string name="tweet_volume">"tweet %s times."</string>
+    <string name="trend_title">"Twitter Trends"</string>
 </resources>

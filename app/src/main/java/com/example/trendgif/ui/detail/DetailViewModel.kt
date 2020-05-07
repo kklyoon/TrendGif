@@ -9,10 +9,11 @@ import com.example.trendgif.util.Logger
 class DetailViewModel(val item: GifObject) : ViewModel() {
     val logger = Logger.getLogger(this.javaClass.simpleName)
 
-    private val _gifItem = MutableLiveData<GifObject>(item)
+    private val _gifItem = MutableLiveData(item)
     val gifItem: LiveData<GifObject> = _gifItem
 
     fun setGif(gifObject: GifObject) {
         _gifItem.postValue(gifObject)
     }
+
 }

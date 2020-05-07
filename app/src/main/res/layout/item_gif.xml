@@ -1,32 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
-
+        <variable
+            name="view"
+            type="android.view.View"/>
         <variable
             name="item"
             type="com.example.trendgif.entity.GifObject" />
-
         <variable
             name="vm"
             type="com.example.trendgif.ui.gif.GifViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_margin="1dp"
         android:onClick="@{()->vm.openDetail(item)}"
-        android:orientation="vertical">
+        android:background="@color/cardview_dark_background"
+        android:orientation="vertical"
+        >
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:SetPreview="@{item}">
+            app:actualImageScaleType="centerCrop"
+            app:SetPreview="@{item}"/>
 
-        </ImageView>
-    </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#33000000"
+            android:visibility="@{vm.isTextEmpty(item.title)? view.GONE: view.VISIBLE}"
+            android:maxHeight="56dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.title}"
+                android:padding="3dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

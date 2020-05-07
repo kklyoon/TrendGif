@@ -53,8 +53,6 @@ class GifFragment : Fragment() {
 
     private fun setUpAdapter() {
         val viewModel = viewDataBinding.vm
-//        val lm =
-//            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         val lm = GridLayoutManager(activity, 2)
         viewModel?.let {
             gifItemAdapter = GifItemAdapter(it)
@@ -64,20 +62,20 @@ class GifFragment : Fragment() {
                 viewDataBinding.progressCircular.hide()
                 if (pagedList.size == 0) {
                     viewDataBinding.tvNoResult.visibility = View.VISIBLE
+                    viewDataBinding.rvSearch.visibility = View.GONE
                     viewDataBinding.tvNoResult.text = String.format(
                         resources.getString(R.string.search_no_result),
                         args.hashtag
                     )
                 } else gifItemAdapter.submitList(pagedList)
             })
-            it.openDetailEvent.observe(viewLifecycleOwner, EventObserver{
+            it.openDetailEvent.observe(viewLifecycleOwner, EventObserver {
                 openGifDetails(it)
             })
         }
     }
 
-    private fun openGifDetails(gifObject: GifObject){
-//        logger.d("openGifDetails ${gifObject}")
+    private fun openGifDetails(gifObject: GifObject) {
         val action = GifFragmentDirections.actionGifToDetail(gifObject)
         findNavController().navigate(action)
     }

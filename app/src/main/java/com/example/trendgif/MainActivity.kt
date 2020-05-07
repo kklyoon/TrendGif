@@ -7,11 +7,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.trendgif.ui.trend.TrendFragmentDirections
 import com.example.trendgif.util.Logger
+import com.facebook.drawee.backends.pipeline.Fresco
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val logger = Logger.getLogger(this.javaClass.simpleName)
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

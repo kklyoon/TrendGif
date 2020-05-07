@@ -1,6 +1,5 @@
 package com.example.trendgif.api
 
-import com.example.trendgif.BuildConfig
 import com.example.trendgif.entity.TweetTrends
 import com.example.trendgif.util.Global
 import com.example.trendgif.util.Oauth1SigningInterceptor
@@ -11,7 +10,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.*
 
 interface TwtAPI {
 
@@ -21,10 +19,10 @@ interface TwtAPI {
     companion object{
         fun getApi():TwtAPI{
             val oauth1SigningInterceptor = Oauth1SigningInterceptor.Builder()
-                .consumerKey(Global.consumerKey)
-                .consumerSecret(Global.consumerSecret)
-                .accessToken(Global.accessToken)
-                .accessSecret(Global.accessSecret).build()
+                .consumerKey(Global.CONSUMER_KEY)
+                .consumerSecret(Global.CONSUMER_SECRET)
+                .accessToken(Global.ACCESS_TOKEN)
+                .accessSecret(Global.ACCESS_SECRET).build()
             val client = OkHttpClient.Builder().addInterceptor(oauth1SigningInterceptor).build()
 //            client.networkInterceptors().add(oauth1SigningInterceptor)
             val retrofit = Retrofit.Builder()

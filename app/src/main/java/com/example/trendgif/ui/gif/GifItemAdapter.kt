@@ -42,7 +42,7 @@ class GifItemAdapter(private val viewModel: GifViewModel): PagedListAdapter<GifO
         }
     }
 
-    class GifViewHolder: RecyclerView.ViewHolder {
+    inner class GifViewHolder: RecyclerView.ViewHolder {
         val binding: ViewDataBinding
         constructor(binding: ViewDataBinding): super(binding.root){
             this.binding = binding
