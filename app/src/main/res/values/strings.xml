@@ -1,9 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <string name="app_name">TrendGif</string>
-    <string name="world">World Wide</string>
-    <string name="kr">Korea</string>
-    <string name="us">USA</string>
-    <string name="search_no_result">No Result for \'%s\'</string>
-    <string name="tweet_volume">"tweet %s times."</string>
-    <string name="trend_title">"Twitter Trends"</string>
+  <string name="add_on_lokalise">add on lokalise</string>
+  <string name="test_words">English, Korean??</string>
 </resources>

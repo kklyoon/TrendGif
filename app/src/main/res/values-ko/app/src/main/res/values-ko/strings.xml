@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="trend_title">트윗 트렌드</string>
+  <string name="tweet_volume">트윗 볼륨</string>
+</resources>
