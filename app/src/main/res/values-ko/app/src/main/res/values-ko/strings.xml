@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name"></string>
+    <string name="kr"></string>
+    <string name="search_no_result"></string>
+    <string name="trend_title"></string>
+    <string name="tweet_volume"></string>
+    <string name="us"></string>
+    <string name="world"></string>
+</resources>
