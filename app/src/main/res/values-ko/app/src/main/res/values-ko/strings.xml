@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name"></string>
+    <string name="kr"></string>
+    <string name="search_no_result">결과 없음\n</string>
+    <string name="trend_title">트윗 트렌드</string>
+    <string name="tweet_volume">트윗 볼륨</string>
+    <string name="us"></string>
+    <string name="world"></string>
+</resources>
